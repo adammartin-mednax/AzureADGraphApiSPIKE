@@ -22,6 +22,9 @@ class HISCUserCreateParameters(UserBase):
         'user_principal_name': {'key': 'userPrincipalName', 'type': 'str'},
         'mail_nickname': {'key': 'mailNickname', 'type': 'str'},
         'other_mails': {'key': 'otherMails', 'type': '[str]'},
+        'city': {'key': 'city', 'type': 'str'},
+        'state': {'key': 'state', 'type': 'str'},
+        'country': {'key': 'country', 'type': 'str'},
         'mail': {'key': 'mail', 'type': 'str'}, # Only useable if we actually have the mail attribute
     }
 
@@ -37,7 +40,10 @@ class HISCUserCreateParameters(UserBase):
         surname=None, 
         user_type=None, 
         mail=None,
-        other_mails=None):
+        other_mails=None,
+        city=None,
+        state=None,
+        country=None):
         super(HISCUserCreateParameters, self).__init__(
             immutable_id=immutable_id, 
             usage_location=usage_location, 
@@ -51,3 +57,6 @@ class HISCUserCreateParameters(UserBase):
         self.mail_nickname = mail_nickname
         self.mail = mail
         self.other_mails = other_mails
+        self.city = city
+        self.state = state
+        self.country = country

@@ -1,4 +1,5 @@
 from user_operations import client
+import json
 import yaml
 
 with open("config/config.yml", 'r') as ymlfile:
@@ -9,6 +10,5 @@ with open("config/config.yml", 'r') as ymlfile:
 user_list = client(cfg).users.list()
 
 for user in user_list:
-    print(user.serialize())
-
-
+    user.enable_additional_properties_sending()
+    print(json.dumps(user.serialize()))
