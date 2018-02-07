@@ -64,6 +64,7 @@ Learn a little more from [This Tutorial](https://docs.microsoft.com/en-us/azure/
 
 Biggest concerns -
 
+* How do I associate the individual to a set of franchises?!?
 * Was I right that signInName is the correct attribute.
 * What is the interaction really like for an end user?
 * Perhaps we completely skip programmatic creation and simply figure out how to programmatically send invitations to join the B2C directory.  Topics to interrogate:
