@@ -31,7 +31,7 @@ N/A This is a spike
 
 There have been several lessons learned -
 
-* I am not sure what drives the user id login functionality between `userPrincipalName`, `displayName`, `mailNickname`, and `mail` attribute.
+* I am not sure what drives the user id login functionality between `signInNames`, `userPrincipalName`, `displayName`, `mailNickname`, and `mail` attribute.
 * I am not sure about the relationship between the `mail` attribute and Exchange Online access.
 * There are multiple API's for interacting with user identities.  The two most notable are the Azure AD Graph API and the Microsoft Graph API.  Azure B2C is constrained to the Azure AD Graph API.
 * There are several attributes which may or may not be important we cannot edit:
