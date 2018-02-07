@@ -43,7 +43,8 @@ N/A This is a spike
 
 There have been several lessons learned -
 
-* I am not sure what drives the user id login functionality between `signInNames`, `userPrincipalName`, `displayName`, `mailNickname`, and `mail` attribute.
+* Sign In Names seems to be the key to what you use to login as but not sure how this ties in to anything yet.  [Create Local User Account](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#CreateLocalAccountUser)
+  * If it is not `signInNames` that drives the login then it may be `userPrincipalName`, `displayName`, `mailNickname`, and `mail` attribute.
 * I am not sure about the relationship between the `mail` attribute and Exchange Online access.
 * There are multiple API's for interacting with user identities.  The two most notable are the Azure AD Graph API and the Microsoft Graph API.  Azure B2C is constrained to the Azure AD Graph API.
 * There are several attributes which may or may not be important we cannot edit:
@@ -53,7 +54,6 @@ There have been several lessons learned -
 * The [Azure AD Graph API SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/azure-graphrbac) is rather badly written and you must extend to get the desired funcationality.  Luckily it seems to be designed for extension as I was easily able to extend the `UserBase` object.  If there is concern you can go one level down as `UserBase` extends `Model` which is a component in the completely seperate and public [MSRest Project](https://github.com/Azure/msrest-for-python).
   * Biggest issue with the graph api is that in approximately version 0.40 of the package they added `additional_properties` argument.  While this argument takes a dict it only handles simple mappings not a case where a key contiains a list of values. As such `otherMails` and `signInNames` are not supported in the current implementation.
   * I suspect that several object will need to be dealt with: `user_create_parameters`, `user_update_parameters`, and `user_get_parameters` probably all need some massaging. 
-* Sign In Names seems to be the key to what you use to login as but not sure how this ties in to anything yet.  [Create Local User Account](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#CreateLocalAccountUser)
 * Update seems as easy as create though you may need to find the user desired.
 * Deactivate is fundamentally an update on teh surface.
 * Group manipulations look strateforward once you understand the user api.
