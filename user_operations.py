@@ -1,6 +1,6 @@
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.graphrbac import GraphRbacManagementClient
-from azure.graphrbac.models import PasswordProfile
+from azure.graphrbac.models import PasswordProfile, SignInName
 from hisc_user_create_parameters import HISCUserCreateParameters
 
 def create_user(fname, lname, email, config):
@@ -15,12 +15,14 @@ def _user_create_parameters(fname, lname, email, config):
 		display_name='{}.{}'.format(fname, lname),
 		password_profile=_password_profile(config),
 		user_principal_name=_principle_name(email, config),
-		mail_nickname=mail_nickname,
+		mail_nickname=_mail_nickname(email),
 		given_name=fname,
 		surname=lname,
 		user_type='Guest',
 		other_mails=[email],
-		usage_location='US'
+		sign_in_names=[_sign_in_name(email)],
+		usage_location='US',
+		creation_type='LocalAccount'
     )
 
 def _principle_name(email, config):
@@ -37,3 +39,6 @@ def _credentials(config):
 
 def _password_profile(config):
 	return PasswordProfile(password=config['default_password'], force_change_password_next_login=True)
+
+def _sign_in_name(email):
+	return SignInName(type='emailAddress', value=email)

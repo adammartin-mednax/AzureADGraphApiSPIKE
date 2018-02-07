@@ -39,11 +39,9 @@ There have been several lessons learned -
   * `creationType` - This attribute which can have the value of `Invitation` is not editable.  I'm curious to know if this is what drives the send invitation process through B2C.
   * `proxy_addresses` - I am unsure about the purpose or usage of this attribute but it is not settable.
 * The [Azure AD Graph API SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/azure-graphrbac) is rather badly written and you virtually must extend to get the desired funcationality.  Luckily it seems to be designed for extension as I was easily able to extend the `UserBase` object.  If there is concern you can go one level down as `UserBase` extends `Model` which is a component in the completely seperate [MSRest Project](https://github.com/Azure/msrest-for-python).
+* Sign In Names seems to be the key to what you use to login as but not sure how this ties in to anything yet.  [Create Local User Account](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#CreateLocalAccountUser)
 
 ## TODO
-
-I want to interrogate this little GEM:
-* [Create Local User Account](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#CreateLocalAccountUser)
 
 I want to figure out how to do an Update on behalf of an owner for a change.
 

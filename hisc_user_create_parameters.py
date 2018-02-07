@@ -26,6 +26,8 @@ class HISCUserCreateParameters(UserBase):
         'state': {'key': 'state', 'type': 'str'},
         'country': {'key': 'country', 'type': 'str'},
         'mail': {'key': 'mail', 'type': 'str'}, # Only useable if we actually have the mail attribute
+        'creation_type': {'key': 'creationType', 'type': 'str'}, # Must be "LocalAccount"
+        'sign_in_names': {'key': 'signInNames', 'type': '[SignInName]'},
     }
 
     def __init__(self, 
@@ -43,7 +45,9 @@ class HISCUserCreateParameters(UserBase):
         other_mails=None,
         city=None,
         state=None,
-        country=None):
+        country=None,
+        creation_type=None,
+        sign_in_names=None):
         super(HISCUserCreateParameters, self).__init__(
             immutable_id=immutable_id, 
             usage_location=usage_location, 
@@ -60,3 +64,5 @@ class HISCUserCreateParameters(UserBase):
         self.city = city
         self.state = state
         self.country = country
+        self.creation_type = creation_type
+        self.sign_in_names = sign_in_names
