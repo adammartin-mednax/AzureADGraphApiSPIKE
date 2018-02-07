@@ -10,5 +10,5 @@ with open("config/config.yml", 'r') as ymlfile:
 user_list = client(cfg).users.list()
 
 for user in user_list:
-    user.enable_additional_properties_sending()
+    user.enable_additional_properties_sending() # yuck!
     print(json.dumps(user.serialize()))
