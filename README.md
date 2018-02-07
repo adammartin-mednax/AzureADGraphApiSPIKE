@@ -17,7 +17,19 @@ N/A This is a spike it is not intended to be installed.
 
 ### Configuration File
 
-TODO: Need to enter this
+This spike assumes a `config` directory with a `config.yml` file
+
+The config file should be formatted as:
+
+```
+tenant_id: [NA Tenant Identity]
+client_id: [Custom application 'Object Id']
+client_key: [Created custom application Client Key]
+ad_graph_url: 'https://graph.windows.net' 
+default_password: [Default Password we want to use]
+principle_template: '{}@HISCFederationDev.onmicrosoft.com'
+
+```
 
 ## Running Tests
 
