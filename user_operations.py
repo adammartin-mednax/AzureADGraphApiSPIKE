@@ -1,13 +1,19 @@
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.graphrbac import GraphRbacManagementClient
-from azure.graphrbac.models import PasswordProfile, SignInName
+from azure.graphrbac.models import PasswordProfile, SignInName, UserUpdateParameters
 from hisc_user_create_parameters import HISCUserCreateParameters
 
 def create_user(fname, lname, email, config):
 	return client(config).users.create(_user_create_parameters(fname, lname, email, config))
 
+def update_user(object_id, franchises, config):
+	return client(config).users.update(object_id, _user_update_parameters(franchises))
+
 def client(config):
 	return GraphRbacManagementClient(_credentials(config), config['tenant_id'])
+
+def _user_update_parameters(franchises):
+	return UserUpdateParameters(additional_properties={'extension_e26ba073fd5142af9fa6455daecdcc9c_franchises': franchises})
 
 def _user_create_parameters(fname, lname, email, config):
 	return HISCUserCreateParameters(
