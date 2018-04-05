@@ -25,7 +25,7 @@ The config file should be formatted as:
 tenant_id: [NA Tenant Identity]
 client_id: [Custom application 'Object Id']
 client_key: [Created custom application Client Key]
-ad_graph_url: 'https://graph.windows.net' 
+ad_graph_url: 'https://graph.windows.net'
 default_password: [Default Password we want to use]
 principle_template: '{}@HISCFederationDev.onmicrosoft.com'
 
@@ -51,20 +51,20 @@ There have been several lessons learned -
   * `mail` - This attibute cannot be modified per Microsoft: `Because the mail attribute is tied to Exchange Online, we don't permit you to write to that attribute unless you have an Exchange Online license.  When you activate a license for the user, Exchange Online will update the field with the correct mailbox mail address during the creation of the user's mailbox.  You can utilize "MailNickName" and " otherMails" during the creation of a user.  This field will also depend upon if it is a "local account (B2C)" or "work or school account".`
   * `creationType` - This attribute which can have the value of `Invitation` is not editable.  I'm curious to know if this is what drives the send invitation process through B2C.
   * `proxy_addresses` - I am unsure about the purpose or usage of this attribute but it is not settable.
-* The [Azure AD Graph API SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/azure-graphrbac) is rather badly written and you must extend to get the desired funcationality.  Luckily it seems to be designed for extension as I was easily able to extend the `UserBase` object.  If there is concern you can go one level down as `UserBase` extends `Model` which is a component in the completely seperate and public [MSRest Project](https://github.com/Azure/msrest-for-python).
-  * Biggest issue with the graph api is that in approximately version 0.40 of the package they added `additional_properties` argument.  While this argument takes a dict it only handles simple mappings not a case where a key contiains a list of values. As such `otherMails` and `signInNames` are not supported in the current implementation.
+* The [Azure AD Graph API SDK](https://github.com/Azure/azure-sdk-for-python/tree/master/azure-graphrbac) is rather badly written and you must extend to get the desired functionality.  Luckily it seems to be designed for extension as I was easily able to extend the `UserBase` object.  If there is concern you can go one level down as `UserBase` extends `Model` which is a component in the completely seperate and public [MSRest Project](https://github.com/Azure/msrest-for-python).
+  * Biggest issue with the graph api is that in approximately version 0.40 of the package they added `additional_properties` argument.  While this argument takes a dict it only handles simple mappings not a case where a key contains a list of values. As such `otherMails` and `signInNames` are not supported in the current implementation.
   * I suspect that several object will need to be dealt with: `user_create_parameters`, `user_update_parameters`, and `user_get_parameters` probably all need some massaging.
   * Filtration (i.e. finding specific records or groups of records) will require knowledge of how to generate [Filters](https://msdn.microsoft.com/library/azure/ad/graph/howto/azure-ad-graph-api-supported-queries-filters-and-paging-options#-filter)
   * The [API Documentation](http://azure-sdk-for-python.readthedocs.io/en/latest/graphrbac.html) is fairly anemic.
   * Available [User Attributes](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/entity-and-complex-type-reference#user-entity) are documented.
 * Deactivate is fundamentally an update from what I see in the documentation.  Note the ability to do a delete can only be granted via PowerShell but I don't think this is a required capability.
-* Group manipulations look strateforward once you understand the user api [Group Operations](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations).  We again may need custom objects.
+* Group manipulations look strait forward once you understand the user api [Group Operations](https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations).  We again may need custom objects.
 * Semi useless but there is documentation on the [Azure Error Codes](https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-error-codes-and-error-handling)
-* If we need greater ganularity on Azure AD Graph API Client Instantiation there is an [ADAL Client](https://docs.microsoft.com/en-us/python/azure/python-sdk-azure-authenticate?view=azure-python#mgmt-auth-token).  I did not see a reason to use it.
+* If we need greater granularity on Azure AD Graph API Client Instantiation there is an [ADAL Client](https://docs.microsoft.com/en-us/python/azure/python-sdk-azure-authenticate?view=azure-python#mgmt-auth-token).  I did not see a reason to use it.
 * Configuration of a B2C tenant and it's API information is [Documented](https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-devquickstarts-graph-dotnet) but most of this should already be accomplished by the time an engineering team gets involved.
 
 Extension Attributes lessons learned -
-* Extension Attributes aren't normally accessable from the Azure AD Graph API.
+* Extension Attributes aren't normally accessible from the Azure AD Graph API.
 * Followed instructions on [Adding Extension Attributes](https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-directory-schema-extensions#SampleRequests) to create a franchises attribute for use associated to the `Consumer IAM` application.  The instructions are very out of date in many ways.
   * URL To create extension attributes: `https://graph.windows.net/[Tenant ID]/applications/[Application ID]/extensionProperties?api-version=1.6`
   * URL to find the object Id is easiest here `https://graph.windows.net/[Tenant ID]/applications?api-version=1.6`
