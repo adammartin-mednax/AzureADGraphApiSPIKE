@@ -3,8 +3,8 @@ from azure.graphrbac import GraphRbacManagementClient
 from azure.graphrbac.models import PasswordProfile, SignInName, UserUpdateParameters
 from hisc_user_create_parameters import HISCUserCreateParameters
 
-def create_user(fname, lname, email, config):
-	return client(config).users.create(_user_create_parameters(fname, lname, email, config))
+def create_user(fname, lname, email, franchises, config):
+	return client(config).users.create(_user_create_parameters(fname, lname, email, franchises, config))
 
 def update_user(object_id, franchises, config):
 	return client(config).users.update(object_id, _user_update_parameters(franchises))
@@ -15,8 +15,9 @@ def client(config):
 def _user_update_parameters(franchises):
 	return UserUpdateParameters(additional_properties={'extension_e26ba073fd5142af9fa6455daecdcc9c_franchises': franchises})
 
-def _user_create_parameters(fname, lname, email, config):
+def _user_create_parameters(fname, lname, email, franchises, config):
 	return HISCUserCreateParameters(
+		additional_properties={'extension_e26ba073fd5142af9fa6455daecdcc9c_franchises': franchises},
 		account_enabled=True,
 		display_name='{}.{}'.format(fname, lname),
 		password_profile=_password_profile(config),

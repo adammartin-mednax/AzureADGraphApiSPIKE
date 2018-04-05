@@ -11,6 +11,7 @@ class HISCUserCreateParameters(UserBase):
     }
 
     _attribute_map = {
+        'additional_properties': {'key': '', 'type': '{object}'},
         'immutable_id': {'key': 'immutableId', 'type': 'str'},
         'usage_location': {'key': 'usageLocation', 'type': 'str'},
         'given_name': {'key': 'givenName', 'type': 'str'},
@@ -36,6 +37,7 @@ class HISCUserCreateParameters(UserBase):
         password_profile, 
         user_principal_name, 
         mail_nickname, 
+        additional_properties=None,
         immutable_id=None, 
         usage_location=None, 
         given_name=None, 
@@ -53,7 +55,8 @@ class HISCUserCreateParameters(UserBase):
             usage_location=usage_location, 
             given_name=given_name, 
             surname=surname, 
-            user_type=user_type)
+            user_type=user_type,
+            additional_properties=additional_properties)
         self.account_enabled = account_enabled
         self.display_name = display_name
         self.password_profile = password_profile

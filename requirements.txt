@@ -1,2 +1,3 @@
 azure-graphrbac
 pyyaml
+oauth2client

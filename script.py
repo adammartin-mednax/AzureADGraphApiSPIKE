@@ -1,4 +1,4 @@
-from user_operations import client, update_user
+from user_operations import client
 import json
 import yaml
 
